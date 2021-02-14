@@ -5,6 +5,7 @@ import (
 )
 
 var numIncrementObject numIncrement
+var once sync.Once
 
 type NumIncrementCreator struct{}
 
