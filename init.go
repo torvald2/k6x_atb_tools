@@ -6,6 +6,6 @@ import (
 )
 
 func init() {
-	modules.Register("k6/atb/dateincrement", new(increments.DateIncrementCreator))
-	modules.Register("k6/atb/numericincrement", new(increments.NumIncrementCreator))
+	modules.Register("k6/x/atb/dateincrement", new(increments.DateIncrementCreator))
+	modules.Register("k6/x/atb/numericincrement", new(increments.NumIncrementCreator))
 }
