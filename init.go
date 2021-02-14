@@ -7,5 +7,5 @@ import (
 
 func init() {
 	modules.Register("k6/atb/dateincrement", new(increments.DateIncrementCreator))
-	modules.Register("k6/atb/dateincrement", new(increments.NumIncrementCreator))
+	modules.Register("k6/atb/numincrement", new(increments.NumIncrementCreator))
 }
