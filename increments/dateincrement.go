@@ -31,11 +31,11 @@ func (r *DateIncrementCreator) New(start string, step int) *dateIncrement {
 	return &dateIncrementObject
 }
 
-func (i *dateIncrement) Get() time.Time {
+func (i *dateIncrement) Get() string {
 	i.mu.Lock()
 	defer func() {
 		i.CurrentDate = i.CurrentDate.AddDate(0, 0, i.Increment)
 		i.mu.Unlock()
 	}()
-	return i.CurrentDate
+	return i.CurrentDate.Format(DATE_FORMAT)
 }
