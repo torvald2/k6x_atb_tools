@@ -10,7 +10,8 @@ type httpClient struct {
 	Client *http.Client
 }
 
-//get 1env
+//get env
 func (client *httpClient) Get(url string) (*http.Response, error) {
 	return client.Client.Get(url)
+
 }

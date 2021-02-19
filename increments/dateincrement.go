@@ -1,6 +1,7 @@
 package increments
 
 import (
+	"log"
 	"sync"
 	"time"
 )
@@ -23,6 +24,7 @@ type dateIncrement struct {
 func (r *DateIncrementCreator) New(start string, step int) *dateIncrement {
 	once_d.Do(func() {
 		t, err := time.Parse(DATE_FORMAT, start)
+		log.Printf("=====CREATING_NUM=======")
 		if err != nil {
 			panic("Date format must be 2006-01-02 ")
 		}
