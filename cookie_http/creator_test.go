@@ -21,6 +21,6 @@ func TestHttpClientCreator_New(t *testing.T) {
 		}
 	}
 	if !isFooCookie {
-		t.Errorf("No foo cookie")
+		t.Errorf("No foo cooki")
 	}
 }
