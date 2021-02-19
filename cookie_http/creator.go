@@ -1,6 +1,7 @@
 package cookie_http
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -17,6 +18,7 @@ func (creator *HttpClientCreator) New(cookies map[string]string, url string) htt
 }
 
 func createClient(stringCookies map[string]string, stringUrl string) {
+	fmt.Printf("Creating")
 	var cookies []*http.Cookie
 	siteUrl, err := url.Parse(stringUrl)
 	if err != nil {
