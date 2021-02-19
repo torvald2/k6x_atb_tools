@@ -11,7 +11,7 @@ var once sync.Once
 
 type HttpClientCreator struct{}
 
-func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl string) httpClient {
+func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl string) *httpClient {
 	once.Do(func() {
 		var cookies []*http.Cookie
 
@@ -31,5 +31,5 @@ func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl
 
 		thisClient = httpClient{&http.Client{Jar: jar}}
 	})
-	return thisClient
+	return &thisClient
 }
