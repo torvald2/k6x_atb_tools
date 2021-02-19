@@ -11,7 +11,8 @@ type httpClient struct {
 }
 
 //get env
-func (client *httpClient) Get(url string) (*http.Response, error) {
-	return client.Client.Get(url)
+func (client *httpClient) Get(url string) int {
+	res, _ := client.Client.Get(url)
+	return res.StatusCode
 
 }
