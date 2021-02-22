@@ -3,6 +3,7 @@ package cookie_http
 import (
 	"io"
 	"net/http"
+	"time"
 
 	"github.com/tcnksm/go-httpstat"
 )
@@ -31,8 +32,16 @@ func (client *httpClient) Get(url string) measuresResponse {
 	if err != nil {
 		panic(err.Error())
 	}
-	res, _ := client.Client.Do(req)
-	response, _ := createResponse(res, results)
+	res, err := client.Client.Do(req)
+	if err != nil {
+		panic(err.Error())
+
+	}
+	response_time := time.Now()
+	response, err := createResponse(res, results, response_time)
+	if err != nil {
+		panic(err.Error())
+	}
 	return response
 
 }
