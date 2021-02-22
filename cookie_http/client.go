@@ -2,6 +2,7 @@ package cookie_http
 
 import (
 	"io"
+	"log"
 	"net/http"
 	"time"
 
@@ -33,15 +34,12 @@ func (client *httpClient) Get(url string) measuresResponse {
 		panic(err.Error())
 	}
 	res, err := client.Client.Do(req)
-	if err != nil {
-		panic(err.Error())
-
-	}
 	response_time := time.Now()
-	response, err := createResponse(res, results, response_time)
+
 	if err != nil {
-		panic(err.Error())
+		log.Print(err.Error())
+		return createErrorResponse(results, response_time)
 	}
-	return response
+	return createResponse(res, results, response_time)
 
 }
