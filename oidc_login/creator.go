@@ -17,7 +17,7 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 		}
 		defer page.Close()
 		if err := page.WaitForWithTimeout(login_selector, 2*time.Second); err != nil {
-			panic("2s wait for login page error")
+			panic(err.Error())
 		}
 		err = page.FillInput(login_selector, login)
 		if err != nil {
@@ -32,7 +32,7 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 			panic(err.Error())
 		}
 		if err := page.WaitForWithTimeout(main_page_selector, 2*time.Second); err != nil {
-			panic("2s wait for main page error")
+			panic(err.Error())
 		}
 
 		data, err := page.GetCookie()
