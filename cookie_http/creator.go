@@ -1,6 +1,7 @@
 package cookie_http
 
 import (
+	"crypto/tls"
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
@@ -28,8 +29,11 @@ func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl
 			cookies = append(cookies, &cookie)
 		}
 		jar.SetCookies(siteUrl, cookies)
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		}
 
-		thisClient = httpClient{&http.Client{Jar: jar}}
+		thisClient = httpClient{&http.Client{Jar: jar, Transport: tr}}
 	})
 	return &thisClient
 }

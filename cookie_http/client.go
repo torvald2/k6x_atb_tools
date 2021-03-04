@@ -24,7 +24,6 @@ func (client *httpClient) getRequest(method string, url string, data io.Reader, 
 	context := httpstat.WithHTTPStat(req.Context(), stat)
 	req = req.WithContext(context)
 	return req, nil
-
 }
 
 //get env
