@@ -1,6 +1,9 @@
 package oidc_login
 
 import (
+	"time"
+
+	conditions "github.com/serge1peshcoff/selenium-go-conditions"
 	"github.com/tebeka/selenium"
 	"github.com/tebeka/selenium/chrome"
 )
@@ -35,6 +38,10 @@ func (page *Page) GetCookie() (cookies map[string]string, err error) {
 		cookies[cookie.Name] = cookie.Value
 	}
 	return
+}
+
+func (page *Page) WaitForWithTimeout(selector string, timeForWait time.Duration) error {
+	return page.driver.WaitWithTimeout(conditions.ElementIsLocated(selenium.ByCSSSelector, selector), timeForWait)
 }
 
 func (page *Page) Close() error {
