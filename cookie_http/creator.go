@@ -32,6 +32,7 @@ func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl
 		tr := &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		}
+		//ignore tls
 
 		thisClient = httpClient{&http.Client{Jar: jar, Transport: tr}}
 	})
