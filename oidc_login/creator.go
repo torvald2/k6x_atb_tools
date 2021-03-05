@@ -17,7 +17,7 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 			panic(err.Error())
 		}
 		defer page.Close()
-		if err := page.WaitForWithTimeout(login_selector, 2*time.Second); err != nil {
+		if err := page.WaitForWithTimeout(login_selector, 20*time.Second); err != nil {
 			source, _ := page.driver.PageSource()
 			url, _ := page.driver.CurrentURL()
 			panic(fmt.Sprintf("Error %v, url %v, body %v", err.Error(), url, source))
@@ -34,7 +34,7 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 		if err != nil {
 			panic(err.Error())
 		}
-		if err := page.WaitForWithTimeout(main_page_selector, 2*time.Second); err != nil {
+		if err := page.WaitForWithTimeout(main_page_selector, 20*time.Second); err != nil {
 			panic(err.Error())
 		}
 
