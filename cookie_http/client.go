@@ -10,8 +10,6 @@ import (
 	"github.com/tcnksm/go-httpstat"
 )
 
-var thisClient httpClient
-
 type httpClient struct {
 	Client *http.Client
 }
