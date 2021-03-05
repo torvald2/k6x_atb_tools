@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//
 type CookiesCreator struct{}
 
 func (creator *CookiesCreator) New(server_url, target_url, login, password, login_selector, password_selector, submit_selector, main_page_selector string) map[string]string {
@@ -33,11 +34,9 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 	if err := page.WaitForWithTimeout(main_page_selector, 20*time.Second); err != nil {
 		panic(err.Error())
 	}
-
 	data, err := page.GetCookie()
 	if err != nil {
 		panic(err.Error())
 	}
-
 	return data
 }
