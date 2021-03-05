@@ -5,14 +5,11 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
-	"sync"
 )
-
-var once sync.Once
 
 type HttpClientCreator struct{}
 
-func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl string) httpClient {
+func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl string) *httpClient {
 	var cookies []*http.Cookie
 
 	siteUrl, err := url.Parse(stringUrl)
@@ -33,5 +30,5 @@ func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl
 	}
 	//ignore tls
 
-	return httpClient{&http.Client{Jar: jar, Transport: tr}}
+	return &httpClient{&http.Client{Jar: jar, Transport: tr}}
 }
