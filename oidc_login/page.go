@@ -30,14 +30,15 @@ func (page *Page) ClickElement(selector string) error {
 	}
 }
 func (page *Page) GetCookie() (cookies map[string]string, err error) {
+	m := make(map[string]string)
 	tmp_cookie, err := page.driver.GetCookies()
 	if err != nil {
 		return
 	}
 	for _, cookie := range tmp_cookie {
-		cookies[cookie.Name] = cookie.Value
+		m[cookie.Name] = cookie.Value
 	}
-	return
+	return m, nil
 }
 
 func (page *Page) WaitForWithTimeout(selector string, timeForWait time.Duration) error {
