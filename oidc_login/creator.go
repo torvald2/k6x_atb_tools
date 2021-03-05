@@ -1,6 +1,7 @@
 package oidc_login
 
 import (
+	"fmt"
 	"sync"
 	"time"
 )
@@ -17,7 +18,9 @@ func (creator *CookiesCreator) New(server_url, target_url, login, password, logi
 		}
 		defer page.Close()
 		if err := page.WaitForWithTimeout(login_selector, 2*time.Second); err != nil {
-			panic(err.Error())
+			source, _ := page.driver.PageSource()
+			url, _ := page.driver.CurrentURL()
+			panic(fmt.Sprintf("Error %v, url %v, body %v", err.Error(), url, source))
 		}
 		err = page.FillInput(login_selector, login)
 		if err != nil {
