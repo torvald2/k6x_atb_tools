@@ -21,7 +21,7 @@ type dateIncrement struct {
 	mu          sync.Mutex
 }
 
-func (r *DateIncrementCreator) New(start string, step int) *dateIncrement {
+func (r *DateIncrementCreator) Create(start string, step int) *dateIncrement {
 	once_d.Do(func() {
 		t, err := time.Parse(DATE_FORMAT, start)
 		log.Printf("=====CREATING_NUM=======")

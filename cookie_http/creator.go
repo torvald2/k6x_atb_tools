@@ -9,7 +9,7 @@ import (
 
 type HttpClientCreator struct{}
 
-func (creator *HttpClientCreator) New(stringCookies map[string]string, stringUrl string) *httpClient {
+func (creator *HttpClientCreator) Create(stringCookies map[string]string, stringUrl string) *httpClient {
 	var cookies []*http.Cookie
 
 	siteUrl, err := url.Parse(stringUrl)

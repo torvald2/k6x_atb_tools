@@ -15,7 +15,7 @@ type numIncrement struct {
 	mu            sync.Mutex
 }
 
-func (r *NumIncrementCreator) New(start, step int) *numIncrement {
+func (r *NumIncrementCreator) Create(start, step int) *numIncrement {
 	once.Do(func() {
 		numIncrementObject = numIncrement{CurrentNumber: start, Increment: step}
 	})

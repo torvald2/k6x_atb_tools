@@ -8,7 +8,7 @@ import (
 //
 type CookiesCreator struct{}
 
-func (creator *CookiesCreator) New(server_url, target_url, login, password, login_selector, password_selector, submit_selector, main_page_selector string) map[string]string {
+func (creator *CookiesCreator) Create(server_url, target_url, login, password, login_selector, password_selector, submit_selector, main_page_selector string) map[string]string {
 	page, err := createPage(server_url, target_url)
 	if err != nil {
 		panic(err.Error())
