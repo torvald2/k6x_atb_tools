@@ -1,10 +1,12 @@
 package cookie_http
 
 import (
+	"bytes"
+	"encoding/json"
 	"io"
 	"log"
+	"mime/multipart"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/tcnksm/go-httpstat"
@@ -42,9 +44,9 @@ func (client *httpClient) Get(url string) measuresResponse {
 
 }
 
-func (client *httpClient) POST(url string, data string) measuresResponse {
+func (client *httpClient) postData(url string, data io.Reader) measuresResponse {
 	var results httpstat.Result
-	req, err := client.getRequest("POST", url, strings.NewReader(data), &results)
+	req, err := client.getRequest("POST", url, data, &results)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -56,5 +58,31 @@ func (client *httpClient) POST(url string, data string) measuresResponse {
 		return createErrorResponse(results, response_time)
 	}
 	return createResponse(res, results, response_time)
+
+}
+
+func (client *httpClient) PostFormData(url string, data string) measuresResponse {
+	var parsedData map[string]string
+	buf := new(bytes.Buffer)
+	multipartWriter := multipart.NewWriter(buf)
+	defer multipartWriter.Close()
+
+	byte_data := []byte(data)
+	if err := json.Unmarshal(byte_data, &parsedData); err != nil {
+		panic(err.Error())
+	}
+
+	for k, v := range parsedData {
+		field, err := multipartWriter.CreateFormField(k)
+		if err != nil {
+			panic(err.Error())
+		}
+		_, err = field.Write([]byte(v))
+		if err != nil {
+			panic(err.Error())
+		}
+	}
+	response := client.postData(url, buf)
+	return response
 
 }
